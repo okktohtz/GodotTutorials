@@ -10,8 +10,8 @@ public partial class Player1 : CharacterBody2D
 	private int health = 100;
 	private Vector2 spawnPosition;
 	private PlayerState CurrentState = PlayerState.Normal;
-
-	public override void _PhysicsProcess(double delta)
+    private bool isFlashing = false;
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector2 direction = Input.GetVector(
 			"ui_left",
@@ -51,7 +51,10 @@ public partial class Player1 : CharacterBody2D
 
 		GlobalHelper.Log("Damage cooldown started");
 
-		if (health <= 0)
+        GetNode<Timer>("InvincibilityFlashTimer").Start();
+
+
+        if (health <= 0)
 		{
 			Die();
 		}
@@ -94,8 +97,22 @@ public partial class Player1 : CharacterBody2D
 
 	private void OnDamageCooldownTimeout()
 	{
-		CurrentState = PlayerState.Normal;
+        CurrentState = PlayerState.Normal;
 
-		GlobalHelper.Log("Damage cooldown ended - Player is vulnerable");
-	}
+        GetNode<Timer>("InvincibilityFlashTimer").Stop();
+
+        isFlashing = false;
+        Modulate = new Color(1, 1, 1, 1);
+
+        GlobalHelper.Log("Damage cooldown ended - Player is vulnerable");
+    }
+
+    private void OnInvincibilityFlashTimerTimeout()
+    {
+        isFlashing = !isFlashing;
+
+        Modulate = isFlashing
+            ? new Color(1, 1, 1, 0.3f)
+            : new Color(1, 1, 1, 1);
+    }
 }
