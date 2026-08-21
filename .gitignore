@@ -1,3 +1,22 @@
-# Godot 4+ specific ignores
+# Godot
 .godot/
 /android/
+
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Visual Studio / .NET
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# OS files
+.DS_Store
+Thumbs.db
