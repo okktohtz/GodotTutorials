@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://8yk0pefqfml7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilta3"]
+size = Vector2(27, 23)
+
+[node name="Enemy" type="Area2D" unique_id=493023607]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1965773990]
+
+[node name="Polygon2D" type="Polygon2D" parent="Sprite2D" unique_id=806590977]
+color = Color(0.527837, 0.26839545, 9.62615e-08, 1)
+polygon = PackedVector2Array(0, 0, 0, 21, 24, 22, 24, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104527416]
+position = Vector2(12.5, 10.5)
+shape = SubResource("RectangleShape2D_ilta3")
